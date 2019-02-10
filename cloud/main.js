@@ -34,7 +34,7 @@
     Parse.Push.send({
       where  : pushQuery,
       data   : {
-        alert: "Message: " + messageText
+        alert: "Message: "
       }
     }, 
      {
