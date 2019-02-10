@@ -23,20 +23,12 @@
     const response = await pushQuery.find({ useMasterKey: true });
 
     // Send push notification to query
-    await Parse.Push.send({
+    await Parse.Push
+      .send({
       where  : pushQuery,
-      data   : {
-        alert: "Message: "
-      }
-    }, 
-     {
-      success: function() {
-        console.log("#### PUSH OK");
-      }, 
-      error  : function(error) {
-        console.log("#### PUSH ERROR" + error.message);
-      }, 
-      useMasterKey: true
+      data   : data
+    }, { 
+      useMasterKey: true 
     });
     
     return response
