@@ -11,17 +11,6 @@ if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
-var authKeyPath = path.resolve(__dirname, '5625L42PQG.p8');
-
-var pushConfig = {'ios': { token: {
-   key: authKeyPath, // P8 file only
-   keyId: '5625L42PQG', // key ID
-   teamId: 'WMVNZYDS86', // The Team ID of your Apple Developer Account 
-  },
-  production: false // set explicitly
- }
-};
-
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://heroku_9mt0zg1v:vp2t04945ds1rb6cv8pt3ravd4@ds121674.mlab.com:21674/heroku_9mt0zg1v',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
@@ -31,7 +20,16 @@ var api = new ParseServer({
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   },
-  push: pushConfig
+  push: {
+    'ios': { 
+      token: {
+        key: path.resolve(__dirname + '/AuthKey_5625L42PQG.p8'), // P8 file only
+        keyId: '5625L42PQG', // key ID
+        teamId: 'WMVNZYDS86', // The Team ID of your Apple Developer Account 
+      },
+      production: true // set explicitly
+    }
+  }
 });
   
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
