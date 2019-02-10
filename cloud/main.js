@@ -18,7 +18,7 @@
     // Set our installation query
     var pushQuery = new Parse.Query(Parse.Installation);
     pushQuery.equalTo('deviceType', 'ios');
-    pushQuery.matchesQuery('targetUser', targetUser);
+    pushQuery.matchesQuery('user', targetUser);
 
     // Send push notification to query
     Parse.Push.send({
