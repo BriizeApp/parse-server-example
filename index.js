@@ -29,7 +29,7 @@ var api = new ParseServer({
         teamId: 'WMVNZYDS86', // The Team ID of your Apple Developer Account 
       },
       topic: 'com.milesFishman.Briize',
-      production: false // set explicitly
+      production: true // set explicitly
     }
   }
 });
