@@ -18,7 +18,7 @@
     // Set our installation query
     var pushQuery = new Parse.Query(Parse.Installation);
     pushQuery.equalTo('deviceType', 'ios');
-    pushQuery.matchesQuery('_User', recipientUser); 
+    pushQuery.matchesQuery('user', recipientUser); 
     
     const response = await pushQuery.find({ useMasterKey: true });
     
