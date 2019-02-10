@@ -33,7 +33,9 @@
     // Send push notification to query
     Parse.Push.send({
       where  : pushQuery,
-      data   : data
+      data   : {
+        alert: "Message: " + messageText
+      }
     }, 
      {
       success: function() {
