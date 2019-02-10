@@ -40,12 +40,13 @@
      {
       success: function() {
         console.log("#### PUSH OK");
+        return response
       }, 
       error  : function(error) {
         console.log("#### PUSH ERROR" + error.message);
+        return error
       }, 
       useMasterKey: true
     });
 
-    return response
   });
