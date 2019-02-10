@@ -3,7 +3,7 @@
     res.success('Hi');
   });
 
-  Parse.Cloud.define("requestExpert", async(request) => {
+  Parse.Cloud.define("requestExpert", async request => {
     console.log("Inside requestExpert");
     var params = request.params;
     var user = request.user;
@@ -23,9 +23,7 @@
     // Send push notification to query
     Parse.Push.send({
       where  : pushQuery,
-      data   : {
-        alert: 'One more test 1'
-    }
+      data   : data
     }, 
      { 
       useMasterKey: true 
