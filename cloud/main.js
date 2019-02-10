@@ -31,12 +31,14 @@
     // Send push notification to query
     Parse.Push.send ({
       where: pushQuery,
-      data : data
+      data : {
+        alert: "WORKING"
+      }
     }, { success: function() {
         console.log("#### PUSH OK");
       }, error. : function(error) {
         console.log("#### PUSH ERROR" + error.message);
       }, useMasterKey: true});
     
-    response.success('success');
+    //response.success('success');
   });
