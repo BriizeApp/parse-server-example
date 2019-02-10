@@ -3,7 +3,7 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
-Parse.Cloud.define("requestExpert", async request=> {
+Parse.Cloud.define("requestExpert", function(request, response) {
   console.log("Inside requestExpert");
   var params = request.params;
   var user = request.user;
@@ -22,8 +22,10 @@ Parse.Cloud.define("requestExpert", async request=> {
   
   pushQuery.find({ useMasterKey: true })
     .then(function(object) {
+    response.success(object); 
         console.log("pushQuery got " + object.length);
         }, function(error) {
+    response.error(error);
             console.error("pushQuery find failed. error = " + error.message);
     });
 
@@ -39,5 +41,6 @@ Parse.Cloud.define("requestExpert", async request=> {
       // There was a problem :(
       console.error("#### push error" + error.message);
     });
+response.success('success, end of pushToFollowers')
 });
 
