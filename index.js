@@ -24,11 +24,12 @@ var api = new ParseServer({
   push: {
     'ios': { 
       token: {
-        key: path.resolve(__dirname + '/AuthKey_5625L42PQG.p8'), // P8 file only
+        key: __dirname + '/AuthKey_5625L42PQG.p8', // P8 file only
         keyId: '5625L42PQG', // key ID
         teamId: 'WMVNZYDS86', // The Team ID of your Apple Developer Account 
       },
-      production: true // set explicitly
+      topic: 'com.milesFishman.Briize',
+      production: false // set explicitly
     }
   }
 });
