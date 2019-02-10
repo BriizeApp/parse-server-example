@@ -21,12 +21,12 @@
     pushQuery.matchesQuery ('_User', recipientUser); 
     
     // Safety Check
-    pushQuery.find({useMasterKey: true })
-      .then(function(results) {
-      console.log("pushQuery got " + results.length);
-    }, function(error) {
-      throw error.message
-    });
+//     pushQuery.find({useMasterKey: true })
+//       .then(function(results) {
+//       console.log("pushQuery got " + results.length);
+//     }, function(error) {
+//       throw error.message
+//     });
 
     // Send push notification to query
     Parse.Push.send ({
