@@ -39,11 +39,6 @@ Parse.Cloud.define("requestExpert", async request=> {
         objectId: someKey,
         'content-available': 1
     }
-}, { useMasterKey: true })
-    .then(function() {
-  console.log('Push Sent');
-}, function(error) {
-  console.log('Push Error' + error.message);
-});
+}, { useMasterKey: true });
 });
 
