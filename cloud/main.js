@@ -3,7 +3,7 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
-Parse.Cloud.define("requestExpert", function (request, response) {
+Parse.Cloud.define("requestExpert", async request=> {
   console.log("Inside requestExpert");
   var params = request.params;
   var user = request.user;
@@ -16,16 +16,18 @@ Parse.Cloud.define("requestExpert", function (request, response) {
   recipientUser.equalTo("objectId", request.params.someKey);
 
 // Set our installation query
-  var pushQuery = new Parse.Query(Parse.Installation);
+   const pushQuery = new Parse.Query(Parse.Installation);
    pushQuery.equalTo('deviceType', 'ios');
    pushQuery.matchesQuery('user', recipientUser); 
-   pushQuery.find({ useMasterKey: true }).then(function(object) {
-        response.success(object); 
-        console.log("pushQuery got " + object.length);
-        }, function(error) {
-          response.error(error);
-            console.error("pushQuery find failed. error = " + error.message);
-    });
+  
+  let results;
+  try {
+   results = await pushQuery.find();
+   console.log("pushQuery got " + results.length);
+    
+  } catch(error) {
+        throw error.message;
+  }
 
   // Send push notification to query
   Parse.Push.send({
@@ -39,6 +41,5 @@ Parse.Cloud.define("requestExpert", function (request, response) {
       // There was a problem :(
       console.error("#### push error" + error.message);
     });
-response.success('success, end of pushToFollowers')
 });
 
