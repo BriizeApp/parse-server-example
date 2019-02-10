@@ -18,7 +18,7 @@
     // Set our installation query
     var pushQuery = new Parse.Query(Parse.Installation);
     pushQuery.equalTo('deviceType', 'ios');
-    pushQuery.matchesQuery ('_User', recipientUser); 
+    pushQuery.matchesQuery('_User', recipientUser); 
     
     // Safety Check
 //     pushQuery.find({useMasterKey: true })
@@ -29,14 +29,14 @@
 //     });
 
     // Send push notification to query
-    Parse.Push.send ({
+    Parse.Push.send({
       where: pushQuery,
       data : {
         alert: "WORKING"
       }
     }, { success: function() {
         console.log("#### PUSH OK");
-      }, error. : function(error) {
+      }, error  : function(error) {
         console.log("#### PUSH ERROR" + error.message);
       }, useMasterKey: true});
     
