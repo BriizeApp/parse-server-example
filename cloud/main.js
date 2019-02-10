@@ -18,18 +18,22 @@
     // Set our installation query
     var pushQuery = new Parse.Query(Parse.Installation);
     pushQuery.equalTo('deviceType', 'ios');
-    pushQuery.matchesQuery('user', recipientUser); 
+    pushQuery.equalTo('userId', request.params.someKey); 
     
-    const response = await pushQuery.find({ useMasterKey: true });
+//     const response = await pushQuery.find({ useMasterKey: true });
 
     // Send push notification to query
-    await Parse.Push
-      .send({
+    Parse.Push.send({
       where  : pushQuery,
       data   : data
-    }, { 
+    }, 
+     { 
       useMasterKey: true 
+    })
+      .then(() => {
+      console.log('Push ok');
+    }, (e) => {
+      console.log('Push error', e);
     });
     
-    return response
-  });
+ });
