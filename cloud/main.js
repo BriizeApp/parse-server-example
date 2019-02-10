@@ -3,7 +3,7 @@
     res.success('Hi');
   });
 
-  Parse.Cloud.define("requestExpert", function(request, response) {
+  Parse.Cloud.define("requestExpert", async (request) => {
     console.log("Inside requestExpert");
     var params = request.params;
     var user = request.user;
@@ -20,6 +20,8 @@
     pushQuery.equalTo('deviceType', 'ios');
     pushQuery.matchesQuery('_User', recipientUser); 
     
+    const response = await pushQuery.find({ useMasterKey: true });
+    
     // Safety Check
 //     pushQuery.find({useMasterKey: true })
 //       .then(function(results) {
@@ -30,15 +32,18 @@
 
     // Send push notification to query
     Parse.Push.send({
-      where: pushQuery,
-      data : {
-        alert: "WORKING"
-      }
-    }, { success: function() {
+      where  : pushQuery,
+      data   : data
+    }, 
+     {
+      success: function() {
         console.log("#### PUSH OK");
-      }, error  : function(error) {
+      }, 
+      error  : function(error) {
         console.log("#### PUSH ERROR" + error.message);
-      }, useMasterKey: true});
-    
-    response.success('success');
+      }, 
+      useMasterKey: true
+    });
+
+    return response
   });
