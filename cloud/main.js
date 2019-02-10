@@ -3,7 +3,7 @@
     res.success('Hi');
   });
 
-  Parse.Cloud.define("requestExpert", function(request) {
+  Parse.Cloud.define("requestExpert", async(request) => {
     console.log("Inside requestExpert");
     var params = request.params;
     var user = request.user;
@@ -19,7 +19,6 @@
     var pushQuery = new Parse.Query(Parse.Installation);
     pushQuery.equalTo('deviceType', 'ios');
     pushQuery.matchesQuery('targetUser', targetUser);
-    pushQuery.equalTo('userId', request.params.someKey); 
 
     // Send push notification to query
     Parse.Push.send({
