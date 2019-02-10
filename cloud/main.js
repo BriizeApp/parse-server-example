@@ -3,7 +3,7 @@
     res.success('Hi');
   });
 
-  Parse.Cloud.define("requestExpert", async (request) => {
+  Parse.Cloud.define("requestExpert", function(request) {
     console.log("Inside requestExpert");
     var params = request.params;
     var user = request.user;
