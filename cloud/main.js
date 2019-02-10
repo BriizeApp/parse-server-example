@@ -21,17 +21,9 @@
     pushQuery.matchesQuery('user', recipientUser); 
     
     const response = await pushQuery.find({ useMasterKey: true });
-    
-    // Safety Check
-//     pushQuery.find({useMasterKey: true })
-//       .then(function(results) {
-//       console.log("pushQuery got " + results.length);
-//     }, function(error) {
-//       throw error.message
-//     });
 
     // Send push notification to query
-    Parse.Push.send({
+    await Parse.Push.send({
       where  : pushQuery,
       data   : {
         alert: "Message: "
@@ -40,13 +32,12 @@
      {
       success: function() {
         console.log("#### PUSH OK");
-        return response
       }, 
       error  : function(error) {
         console.log("#### PUSH ERROR" + error.message);
-        return error
       }, 
       useMasterKey: true
     });
-
+    
+    return response
   });
