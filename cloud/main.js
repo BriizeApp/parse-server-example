@@ -31,7 +31,7 @@ Parse.Cloud.define("requestExpert", async request=> {
   
   // Send push notification to query
   Parse.Push.send({
-    where: query,
+    where: pushQuery,
     data: {
         alert: 'One more test 1',
         badge: 1,
@@ -39,7 +39,11 @@ Parse.Cloud.define("requestExpert", async request=> {
         objectId: someKey,
         'content-available': 1
     }
-}, { useMasterKey: true });
-  
+}, { useMasterKey: true })
+    .then(function() {
+  console.log('Push Sent');
+}, function(error) {
+  console.log('Push Error' + error.message);
+});
 });
 
