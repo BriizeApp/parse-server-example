@@ -15,6 +15,7 @@ var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://heroku_9mt0zg1v:vp2t04945ds1rb6cv8pt3ravd4@ds121674.mlab.com:21674/heroku_9mt0zg1v',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'bri009',
+  verbose: true,
   masterKey: process.env.MASTER_KEY || '009bri', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'https://briize.herokuapp.com/parse',  // Don't forget to change to https if needed
   liveQuery: {
