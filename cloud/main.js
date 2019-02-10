@@ -20,26 +20,23 @@ Parse.Cloud.define("requestExpert", async request=> {
    pushQuery.equalTo('deviceType', 'ios');
    pushQuery.matchesQuery('user', recipientUser); 
 
-   let results;
-    try {
-        results = await pushQuery.find();
-        console.log("pushQuery got " + results.length);
-      
-    } catch(error){
-        throw error.message;
-    }
+  pushQuery.find({useMasterKey: true })
+    .then(function(results) {
+    console.log("pushQuery got " + results.length);
+  }, function(error) {
+    throw error.message
+  });
   
   // Send push notification to query
   Parse.Push.send({
     where: pushQuery,
-    data: {
-        alert: 'One more test 1',
-        badge: 1,
-        sound: 'default',
-        objectId: someKey,
-        'content-available': 1
-    }
-}, { useMasterKey: true });
-
+    data: data
+  }, { useMasterKey: true })
+    .then(function() {
+  // Push sent!
+  }, function(error) {
+    throw error.message
+  });
+ 
 });
 
