@@ -22,7 +22,7 @@ Parse.Cloud.define("requestExpert", async request=> {
   
   let results;
   try {
-   results = await pushQuery.find();
+   results = await pushQuery.find({ useMasterKey: true });
    console.log("pushQuery got " + results.length);
     
   } catch(error) {
