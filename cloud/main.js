@@ -13,7 +13,7 @@
 
     // Set our query to target specific user 
     var recipientUser = new Parse.Query(Parse.User);
-    recipientUser.equalTo("objectId", someKey);
+    recipientUser.equalTo("objectId", request.params.someKey);
 
     // Set our installation query
     var pushQuery = new Parse.Query(Parse.Installation);
@@ -21,9 +21,7 @@
     pushQuery.matchesQuery ('_User', recipientUser); 
     
     // Safety Check
-    pushQuery
-      .find({ useMasterKey:true })
-      .then(function(results) {
+    pushQuery.find({ useMasterKey: true }).then(function(results) {
       console.log("pushQuery got " + results.length);
     }, function(error) {
       throw error.message
@@ -33,14 +31,11 @@
     Parse.Push.send ({
       where: pushQuery,
       data : data
-    }, { 
-      success: function() {
+    }, { success: function() {
         console.log("#### PUSH OK");
-      }, 
-      error. : function(error) {
+      }, error. : function(error) {
         console.log("#### PUSH ERROR" + error.message);
-      }, 
-      useMasterKey: true
+      }, useMasterKey: true
     });
     
     response.success('success');
