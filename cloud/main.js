@@ -21,7 +21,8 @@
     pushQuery.matchesQuery ('_User', recipientUser); 
     
     // Safety Check
-    pushQuery.find({ useMasterKey: true }).then(function(results) {
+    pushQuery.find({useMasterKey: true })
+      .then(function(results) {
       console.log("pushQuery got " + results.length);
     }, function(error) {
       throw error.message
@@ -35,8 +36,7 @@
         console.log("#### PUSH OK");
       }, error. : function(error) {
         console.log("#### PUSH ERROR" + error.message);
-      }, useMasterKey: true
-    });
+      }, useMasterKey: true});
     
     response.success('success');
   });
