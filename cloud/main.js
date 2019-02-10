@@ -25,11 +25,7 @@
     Parse.Push.send({
       where  : pushQuery,
       data   : {
-        alert: 'One more test 1',
-        badge: 1,
-        sound: 'default',
-        objectId: user.id,
-        'content-available': 1
+        alert: 'One more test 1'
     }
     }, 
      { 
